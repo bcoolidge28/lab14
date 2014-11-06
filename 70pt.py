@@ -16,7 +16,11 @@ targety1 = 20
 targetx2 = 280
 targety2 = 80
 target = drawpad.create_rectangle(targetx1,targety1,targetx2,targety2, fill="blue")
-player = drawpad.create_rectangle(240,240,260,260, fill="pink")
+px1 = 240
+py1 = 240
+px2 = 260
+py2 = 260
+player = drawpad.create_rectangle(px1, py1, px2, py2, fill="pink")
 
 
 
@@ -45,13 +49,23 @@ class MyApp:
                 # "global" makes sure that we can access our oval and our drawpad
 		global oval
 		global drawpad
+		global player
+		drawpad.move(player,0,-10)
+		global target
                 x1,y1,x2,y2 = drawpad.coords(player)
 		global targetx1, targety1, targetx2, targety2
+		px1, py1, px2, py2 = drawpad.coords(player)
+	
+		
 
 
 		# Ensure that we are doing our collision detection
 		# After we move our object!
-	
+           	if (px1 > targetx1 and px2 < targetx2) and (py1 > targety1 and py2 < targety2):
+           	    drawpad.itemconfig(target, fill = "red") 
+           	else:
+           	    drawpad.itemconfig(target, fill = "blue")
+	       
 	
 		
 myapp = MyApp(root)
